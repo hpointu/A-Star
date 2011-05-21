@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "EventManager.h"
+#include "graphics/Image.h"
 
 Application::Application() :
 	running(true)
@@ -16,6 +17,7 @@ void Application::run()
 	while (running)
 	{
 		EventManager::getInstance()->captureEvent();
+		ra->display();
 	}
 }
 

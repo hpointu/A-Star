@@ -16,6 +16,8 @@ public:
 
 	void display();
 
+	void addDrawable(Drawable *drawable);
+
 private:
 	SDL_Surface *window;
 

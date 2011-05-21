@@ -19,6 +19,11 @@ void RenderArea::init()
 											  SDL_HWSURFACE | SDL_DOUBLEBUF);
 }
 
+void RenderArea::addDrawable(Drawable *drawable)
+{
+	drawables->push_back(drawable);
+}
+
 void RenderArea::display()
 {
 	Uint32 bgColor = SDL_MapRGB(window->format, 255, 255, 255);
@@ -27,7 +32,7 @@ void RenderArea::display()
 	for(unsigned int i=0; i<drawables->size(); i++)
 	{
 		Drawable *obj = drawables->at(i);
-		obj->draw();
+		obj->draw(window);
 	}
 
 	SDL_Flip(window);
