@@ -3,7 +3,7 @@
 
 #include <SDL/SDL.h>
 
-#include "ui/RenderArea.h"
+#include "graphics/RenderArea.h"
 #include "EventListener.h"
 
 class Application : public EventListener

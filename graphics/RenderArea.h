@@ -4,7 +4,7 @@
 #include <SDL/SDL.h>
 #include <vector>
 
-#include "ui/Drawable.h"
+#include "graphics/Drawable.h"
 
 class RenderArea
 {

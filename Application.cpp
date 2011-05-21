@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "ui/EventManager.h"
+#include "EventManager.h"
 
 Application::Application() :
 	running(true)
