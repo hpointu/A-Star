@@ -1,8 +1,8 @@
 #include "Application.h"
+#include "ui/EventManager.h"
 
-#include <SDL/SDL.h>
-
-Application::Application()
+Application::Application() :
+	running(true)
 {
 	ra = new RenderArea(800, 600);
 }
@@ -11,16 +11,19 @@ void Application::run()
 {
 	ra->init();
 
-	bool running = true;
-	SDL_Event event;
+	EventManager::getInstance()->subscribe(this);
 
 	while (running)
 	{
-		SDL_WaitEvent(&event);
-		switch(event.type)
-		{
-		case SDL_QUIT:
-			running = false;
-		}
+		EventManager::getInstance()->captureEvent();
+	}
+}
+
+void Application::onEvent(SDL_Event event)
+{
+	switch(event.type)
+	{
+	case SDL_QUIT:
+		running = false;
 	}
 }

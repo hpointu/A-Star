@@ -24,7 +24,7 @@ void RenderArea::display()
 	Uint32 bgColor = SDL_MapRGB(window->format, 255, 255, 255);
 	SDL_FillRect(window, NULL, bgColor);
 
-	for(int i=0; i<drawables->size(); i++)
+	for(unsigned int i=0; i<drawables->size(); i++)
 	{
 		Drawable *obj = drawables->at(i);
 		obj->draw();
