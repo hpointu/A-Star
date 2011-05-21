@@ -1,8 +1,13 @@
 #include <iostream>
 
+#include "Application.h"
+
 int main()
 {
-	 std::cout << "Launching..." << std::endl;
+	std::cout << "Launching..." << std::endl;
 
-	 return 1;
+	Application app;
+	app.run();
+
+	return 1;
 }
