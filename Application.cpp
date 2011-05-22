@@ -15,7 +15,7 @@ Application::Application(int argc, char **argv) :
 	QApplication(argc, argv),
 	running(true)
 {
-	ra = new RenderArea(800, 600);
+	ra = new RenderArea(1440, 800);
 	graph = 0;
 
 	qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
@@ -47,8 +47,8 @@ void Application::run()
 	Cell::Coord p1, p2;
 	p1.x = 0;
 	p1.y = 0;
-	p2.x = 10;
-	p2.y = 4;
+	p2.x = graph->getWidth()-1;
+	p2.y = graph->getHeight()-1;
 	AStar *astar = new AStar(graph, p1, p2);
 
 	drawer.createEdges();

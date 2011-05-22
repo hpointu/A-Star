@@ -57,6 +57,26 @@ void CellGraph::updateNeighborhood()
 				if(neighbor->getType() == Cell::EMPTY)
 					addEdge(cc, nc);
 			}
+
+
+			// TEST
+
+//			if( (int(cc.x)-1) > -1 && (int(cc.y)-1) > -1)
+//			{
+//				nc.x = cc.x-1;
+//				nc.y = cc.y-1;
+//				Cell *neighbor = findNodeByCoord(nc);
+//				if(neighbor->getType() == Cell::EMPTY)
+//					addEdge(cc, nc);
+//			}
+//			if( (int(cc.x)-1) > -1 && (int(cc.y)+1) < height)
+//			{
+//				nc.x = cc.x-1;
+//				nc.y = cc.y+1;
+//				Cell *neighbor = findNodeByCoord(nc);
+//				if(neighbor->getType() == Cell::EMPTY)
+//					addEdge(cc, nc);
+//			}
 		}
 	}
 

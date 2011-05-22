@@ -52,7 +52,7 @@ void AStar::process()
 			blues.at(i)->node->mark(Utils::MARKED);
 		}
 		toDeploy->node->mark(Utils::ACTIVE);
-		msleep(200);
+		msleep(10);
 		toDeploy->node->mark(Utils::NEUTRAL);
 		p0->node->mark(Utils::START);
 		pAlpha->node->mark(Utils::END);
@@ -60,15 +60,18 @@ void AStar::process()
 
 	// blues.last() holds the good way by its parent's parent's parent's etc
 //	blues.last()->node->mark(Utils::PINED);
-	_Point *_p = blues.last();
-	while(_p->parent != 0)
+	if(!blues.isEmpty())
 	{
-		_p->node->mark(Utils::PINED);
-		graph->markEdge(_p->node->getCoord(), _p->parent->node->getCoord(), Utils::PINED);
-		_p = _p->parent;
+		_Point *_p = blues.last();
+		while(_p->parent != 0)
+		{
+			_p->node->mark(Utils::PINED);
+			graph->markEdge(_p->node->getCoord(), _p->parent->node->getCoord(), Utils::PINED);
+			_p = _p->parent;
+		}
+		p0->node->mark(Utils::START);
+		pAlpha->node->mark(Utils::END);
 	}
-	p0->node->mark(Utils::START);
-	pAlpha->node->mark(Utils::END);
 }
 
 AStar::_Point* AStar::getCheaper(QList<_Point *> list, int &id)
