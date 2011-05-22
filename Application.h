@@ -1,7 +1,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <QApplication>
+#include <QCoreApplication>
 
 #include <SDL/SDL.h>
 #include <QMutex>
@@ -11,7 +11,7 @@
 #include "model/CellGraph.h"
 
 
-class Application : public QApplication, public EventListener
+class Application : public QCoreApplication, public EventListener
 {
 public:
 	Application(int argc, char **argv);

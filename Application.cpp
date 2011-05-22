@@ -12,7 +12,7 @@
 #include "algo/AStar.h"
 
 Application::Application(int argc, char **argv) :
-	QApplication(argc, argv),
+	QCoreApplication(argc, argv),
 	running(true)
 {
 	ra = new RenderArea(1440, 800);

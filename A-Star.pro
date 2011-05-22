@@ -1,3 +1,5 @@
+QT -= gui
+
 SOURCES += \
     main.cpp \
 	 graphics/RenderArea.cpp \
@@ -39,4 +41,4 @@ HEADERS += \
     Utils.h
 
 QMAKE_LIBDIR += /usr/local/lib
-LIBS += -lSDL -lSDL_gfx -lSDL_image -lboost_thread
+LIBS += -lSDL -lSDL_gfx -lSDL_image

@@ -1,3 +1,11 @@
-Build :
+= Dependency =
+You'll need to install some libs and headers :
+qt4-core (libqt4-dev)
+SDL (libsdl1.2-dev)
+SDL_gfx (libsdl-gfx1.2-dev)
+SDL_image (libsdl-image1.2-dev)
 
+
+= Build =
+# Create the Makefile using qmake then compile
 qmake && make
