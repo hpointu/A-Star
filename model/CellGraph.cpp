@@ -20,32 +20,40 @@ void CellGraph::updateNeighborhood()
 		{
 			Cell::Coord cc = cell->getCoord();
 			Cell::Coord nc;
-			if( (cc.x-1) > 0)
+			if( (int(cc.x)-1) > -1)
 			{
 				nc.x = cc.x-1;
 				nc.y = cc.y;
-				addEdge(cc, nc);
+				Cell *neighbor = findNodeByCoord(nc);
+				if(neighbor->getType() == Cell::EMPTY)
+					addEdge(cc, nc);
 			}
 
 			if( (cc.x+1) < width)
 			{
 				nc.x = cc.x+1;
 				nc.y = cc.y;
-				addEdge(cc, nc);
+				Cell *neighbor = findNodeByCoord(nc);
+				if(neighbor->getType() == Cell::EMPTY)
+					addEdge(cc, nc);
 			}
 
-			if( (cc.y-1) > 0)
+			if( (int(cc.y)-1) > -1)
 			{
 				nc.x = cc.x;
-				nc.y = cc.y;
-				addEdge(cc, nc);
+				nc.y = cc.y-1;
+				Cell *neighbor = findNodeByCoord(nc);
+				if(neighbor->getType() == Cell::EMPTY)
+					addEdge(cc, nc);
 			}
 
 			if( (cc.y+1) < height)
 			{
 				nc.x = cc.x;
 				nc.y = cc.y+1;
-				addEdge(cc, nc);
+				Cell *neighbor = findNodeByCoord(nc);
+				if(neighbor->getType() == Cell::EMPTY)
+					addEdge(cc, nc);
 			}
 		}
 	}
@@ -108,7 +116,7 @@ Cell* CellGraph::findNodeByCoord(Cell::Coord coord)
 	{
 		Cell *currentNode = nodeList->at(i);
 		if(currentNode->getCoord().x == coord.x
-			&& currentNode->getCoord().y == coord.y)
+				&& currentNode->getCoord().y == coord.y)
 			node = currentNode;
 	}
 	return node;

@@ -21,7 +21,6 @@ public:
 
 private:
 	CellGraph *graph;
-	unsigned int cellSize;
 	RenderArea *target;
 };
 

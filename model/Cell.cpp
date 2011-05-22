@@ -5,7 +5,7 @@ Cell::Cell(unsigned int x, unsigned int y, Cell::Type type)
 	coord.x = x;
 	coord.y = y;
 
-	type = type;
+	this->type = type;
 }
 
 Cell::Type Cell::getType() const

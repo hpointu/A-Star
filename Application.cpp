@@ -22,8 +22,13 @@ void Application::run()
 	MapFileReader reader("res/map.txt");
 	CellGraph *graph = reader.getGraph();
 
+	graph->updateNeighborhood();
+
 	GraphDrawer drawer(graph, ra);
+
+	drawer.createEdges();
 	drawer.createNodes();
+
 
 	while (running)
 	{

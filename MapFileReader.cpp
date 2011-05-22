@@ -24,14 +24,17 @@ CellGraph* MapFileReader::getGraph()
 	char c;
 	while(fread(&c, 1, 1, file))
 	{
-		int intVal = c-48;
-		Cell::Type type = (intVal) ? Cell::WALL : Cell::EMPTY;
+		if(c != '\n')
+		{
+			int intVal = c-48;
+			Cell::Type type = (intVal == 1) ? Cell::WALL : Cell::EMPTY;
 
-		Cell cell(x, y, type);
-		graph->addNode(cell);
+			Cell cell(x, y, type);
+			graph->addNode(cell);
 
-		// set the coords
-		x++;
+			// set the coords
+			x++;
+		}
 		if(c == '\n')
 		{
 			y++;

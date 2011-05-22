@@ -24,6 +24,7 @@ public:
 	void updateNeighborhood();
 
 	inline std::vector<Cell*>* getNodeList() { return nodeList; }
+	std::map < Cell*, std::vector<Cell*> >* getNeighborhood() { return &neighborhood; }
 
 private:
 	void addEdge(Cell *node1, Cell *node2);
