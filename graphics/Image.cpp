@@ -1,8 +1,8 @@
 #include "Image.h"
 #include <SDL/SDL_image.h>
 
-Image::Image(char *filename) :
+Image::Image(std::string filename) :
 	Drawable()
 {
-	surface = IMG_Load(filename);
+	surface = IMG_Load(filename.data());
 }

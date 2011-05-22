@@ -16,6 +16,7 @@ void Drawable::draw(SDL_Surface *target)
 		position.y = y;
 
 		SDL_Surface *tmp = rotozoomSurface(surface, rot, 1.0, 0);
+
 		SDL_BlitSurface(tmp, NULL, target, &position);
 	}
 }

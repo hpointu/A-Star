@@ -26,7 +26,7 @@ void RenderArea::addDrawable(Drawable *drawable)
 
 void RenderArea::display()
 {
-	Uint32 bgColor = SDL_MapRGB(window->format, 255, 255, 255);
+	Uint32 bgColor = SDL_MapRGB(window->format, 30, 30, 30);
 	SDL_FillRect(window, NULL, bgColor);
 
 	for(unsigned int i=0; i<drawables->size(); i++)

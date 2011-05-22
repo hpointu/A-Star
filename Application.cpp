@@ -2,6 +2,11 @@
 #include "EventManager.h"
 #include "graphics/Image.h"
 
+#include "MapFileReader.h"
+
+#include "model/CellGraph.h"
+#include "graphics/GraphDrawer.h"
+
 Application::Application() :
 	running(true)
 {
@@ -14,10 +19,17 @@ void Application::run()
 
 	EventManager::getInstance()->subscribe(this);
 
+	MapFileReader reader("res/map.txt");
+	CellGraph *graph = reader.getGraph();
+
+	GraphDrawer drawer(graph, ra);
+	drawer.createNodes();
+
 	while (running)
 	{
 		EventManager::getInstance()->captureEvent();
 		ra->display();
+
 	}
 }
 
