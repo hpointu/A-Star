@@ -33,5 +33,5 @@ HEADERS += \
     graphics/NodeImage.h \
     graphics/EdgeLine.h
 
-LIBPATH += /usr/local/lib
+QMAKE_LIBDIR += /usr/local/lib
 LIBS += -lSDL -lSDL_gfx -lSDL_image
