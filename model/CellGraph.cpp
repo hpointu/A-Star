@@ -1,13 +1,14 @@
 #include "CellGraph.h"
 #include <iostream>
+#include <stdlib.h>
 
 CellGraph::CellGraph(unsigned int width, unsigned int height) :
 	width(width),
 	height(height)
 {
-	nodeList = new std::vector<Cell*>();
+	nodeList = new vector<Cell*>();
 
-	std::cout << "Map loaded : " << width << "," << height << std::endl;
+	cout << "Map loaded : " << width << "," << height << endl;
 }
 
 void CellGraph::updateNeighborhood()
@@ -67,7 +68,7 @@ void CellGraph::addNode(const Cell &cell)
 		Cell *myCell = new Cell(cell.getCoord().x, cell.getCoord().y, cell.getType());
 		nodeList->push_back(myCell);
 
-		neighborhood.insert( std::pair<Cell*,std::vector<Cell*> >(myCell, std::vector<Cell*>()) );
+		neighborhood.insert( pair<Cell*,vector<Cell*> >(myCell, vector<Cell*>()) );
 	}
 }
 
@@ -95,6 +96,9 @@ void CellGraph::addEdge(Cell *node1, Cell *node2)
 		{
 			neighborhood[node1].push_back(node2);
 			neighborhood[node2].push_back(node1);
+
+			activeEdgeMat[node1][node2] = false;
+			activeEdgeMat[node2][node1] = false;
 		}
 	}
 }
@@ -129,3 +133,44 @@ Cell* CellGraph::findNodeByCoord(unsigned int x, unsigned int y)
 	coord.y = y;
 	return findNodeByCoord(coord);
 }
+
+
+void CellGraph::activeEdge(Cell::Coord coordNode1, Cell::Coord coordNode2, bool val)
+{
+	Cell *node1 = findNodeByCoord(coordNode1);
+	Cell *node2 = findNodeByCoord(coordNode2);
+
+	activeEdgeMat[node1][node2] = val;
+	activeEdgeMat[node2][node1] = val;
+
+	notifyObservers();
+}
+
+bool CellGraph::isEdgeActive(Cell::Coord coordNode1, Cell::Coord coordNode2)
+{
+	Cell *node1 = findNodeByCoord(coordNode1);
+	Cell *node2 = findNodeByCoord(coordNode2);
+
+	return activeEdgeMat[node1][node2];
+}
+
+// test
+
+void CellGraph::makeActive(bool val)
+{
+	unsigned int x = 1;
+	unsigned int y = 2;
+
+	Cell *winner = findNodeByCoord(x, y);
+	winner->setActive(val);
+
+	Cell::Coord c1, c2;
+	c1.x = 3;
+	c1.y = 3;
+	c2 = c1;
+	c2.x+=1;
+
+	activeEdge(c1, c2, val);
+}
+
+

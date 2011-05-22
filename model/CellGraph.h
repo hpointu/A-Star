@@ -7,8 +7,11 @@
 #include "ModelEntity.h"
 #include "Cell.h"
 
+using namespace std;
+
 class CellGraph : public ModelEntity
 {
+
 public:
 	CellGraph(unsigned int width, unsigned int height);
 
@@ -23,15 +26,23 @@ public:
 
 	void updateNeighborhood();
 
-	inline std::vector<Cell*>* getNodeList() { return nodeList; }
-	std::map < Cell*, std::vector<Cell*> >* getNeighborhood() { return &neighborhood; }
+	inline vector<Cell*>* getNodeList() { return nodeList; }
+	map < Cell*, vector<Cell*> >* getNeighborhood() { return &neighborhood; }
+
+	void activeEdge(Cell::Coord coordNode1, Cell::Coord coordNode2, bool val = true);
+	bool isEdgeActive(Cell::Coord coordNode1, Cell::Coord coordNode2);
+
+	//test
+	void makeActive(bool val);
 
 private:
 	void addEdge(Cell *node1, Cell *node2);
 
-	std::vector<Cell*> *nodeList;
+	vector<Cell*> *nodeList;
 
-	std::map < Cell*, std::vector<Cell*> > neighborhood;
+	map < Cell*, vector<Cell*> > neighborhood;
+
+	map < Cell*, map<Cell*, bool> > activeEdgeMat;
 
 	unsigned int width;
 	unsigned int height;

@@ -1,16 +1,19 @@
 #include "Application.h"
+
+#include <stdlib.h>
+
 #include "EventManager.h"
-#include "graphics/Image.h"
-
 #include "MapFileReader.h"
-
-#include "model/CellGraph.h"
+#include "graphics/Image.h"
 #include "graphics/GraphDrawer.h"
 
 Application::Application() :
 	running(true)
 {
 	ra = new RenderArea(800, 600);
+	graph = 0;
+
+	srand(time(0));
 }
 
 void Application::run()
@@ -20,7 +23,7 @@ void Application::run()
 	EventManager::getInstance()->subscribe(this);
 
 	MapFileReader reader("res/map.txt");
-	CellGraph *graph = reader.getGraph();
+	graph = reader.getGraph();
 
 	graph->updateNeighborhood();
 
@@ -44,5 +47,15 @@ void Application::onEvent(SDL_Event event)
 	{
 	case SDL_QUIT:
 		running = false;
+		break;
+	case SDL_KEYDOWN:
+		graph->makeActive(true);
+		break;
+	case SDL_KEYUP:
+		graph->makeActive(false);
+		break;
+
+	default:
+		break;
 	}
 }

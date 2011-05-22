@@ -1,7 +1,7 @@
 #include "GraphDrawer.h"
 #include "model/Cell.h"
-#include "graphics/Image.h"
-#include "graphics/Line.h"
+#include "graphics/NodeImage.h"
+#include "graphics/EdgeLine.h"
 
 #include "graphics/Graphics.h"
 
@@ -21,7 +21,7 @@ void GraphDrawer::createNodes()
 	{
 		Cell *cell = *it;
 
-		Image *img = new Image("res/node.png");
+		NodeImage *img = new NodeImage(cell);
 
 		Sint16 x = cell->getCoord().x*CELLSIZE + CELLSIZE/2;
 		Sint16 y = cell->getCoord().y*CELLSIZE + CELLSIZE/2;
@@ -62,7 +62,7 @@ void GraphDrawer::createEdges()
 
 			if(!alreadyAdded)   // skip reflexive edges
 			{
-				Line *line = new Line(node->getCoord(), neighbor->getCoord());
+				EdgeLine *line = new EdgeLine(node->getCoord(), neighbor->getCoord(), graph);
 				added.push_back(node);
 
 				target->addDrawable(line);

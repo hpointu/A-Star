@@ -23,9 +23,17 @@ public:
 	Cell::Type getType() const;
 	Cell::Coord getCoord() const;
 
+	inline void setActive(bool val) {
+		active = val;
+		notifyObservers();
+	}
+	inline bool isActive() { return active; }
+
 private:
 	Cell::Type type;
 	Cell::Coord coord;
+
+	bool active;
 };
 
 #endif // CELL_H

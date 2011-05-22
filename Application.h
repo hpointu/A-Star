@@ -5,6 +5,8 @@
 
 #include "graphics/RenderArea.h"
 #include "EventListener.h"
+#include "model/CellGraph.h"
+
 
 class Application : public EventListener
 {
@@ -18,6 +20,8 @@ public:
 private:
 	 RenderArea *ra;
 	 bool running;
+
+	 CellGraph *graph;
 };
 
 #endif // APPLICATION_H

@@ -2,10 +2,11 @@
 
 Cell::Cell(unsigned int x, unsigned int y, Cell::Type type)
 {
-	coord.x = x;
-	coord.y = y;
+	this->coord.x = x;
+	this->coord.y = y;
 
 	this->type = type;
+	this->active = false;
 }
 
 Cell::Type Cell::getType() const
