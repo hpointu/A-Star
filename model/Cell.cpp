@@ -6,7 +6,6 @@ Cell::Cell(unsigned int x, unsigned int y, Cell::Type type)
 	this->coord.y = y;
 
 	this->type = type;
-	this->active = false;
 }
 
 Cell::Type Cell::getType() const

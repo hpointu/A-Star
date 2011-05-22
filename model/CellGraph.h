@@ -6,6 +6,7 @@
 
 #include "ModelEntity.h"
 #include "Cell.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -22,18 +23,22 @@ public:
 	Cell* findNodeByCoord(unsigned int x, unsigned int y);
 	Cell* findNodeByCoord(Cell::Coord coord);
 
+	vector<Cell*> getNeighborOf(Cell* node);
+
 	bool areNeighbors(Cell::Coord coordNode1, Cell::Coord coordNode2);
 
 	void updateNeighborhood();
 
 	inline vector<Cell*>* getNodeList() { return nodeList; }
+
+	inline unsigned int getWidth() { return width; }
+	inline unsigned int getHeight() { return height; }
+
 	map < Cell*, vector<Cell*> >* getNeighborhood() { return &neighborhood; }
 
-	void activeEdge(Cell::Coord coordNode1, Cell::Coord coordNode2, bool val = true);
-	bool isEdgeActive(Cell::Coord coordNode1, Cell::Coord coordNode2);
+	void markEdge(Cell::Coord coordNode1, Cell::Coord coordNode2, Utils::Marker getMark);
+	Utils::Marker getEdgeMark(Cell::Coord coordNode1, Cell::Coord coordNode2);
 
-	//test
-	void makeActive(bool val);
 
 private:
 	void addEdge(Cell *node1, Cell *node2);
@@ -42,7 +47,7 @@ private:
 
 	map < Cell*, vector<Cell*> > neighborhood;
 
-	map < Cell*, map<Cell*, bool> > activeEdgeMat;
+	map < Cell*, map<Cell*, Utils::Marker> > edgeMarkMatrix;
 
 	unsigned int width;
 	unsigned int height;

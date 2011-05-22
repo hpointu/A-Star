@@ -1,6 +1,7 @@
 #include "CellGraph.h"
 #include <iostream>
 #include <stdlib.h>
+#include <QtGlobal>
 
 CellGraph::CellGraph(unsigned int width, unsigned int height) :
 	width(width),
@@ -97,8 +98,8 @@ void CellGraph::addEdge(Cell *node1, Cell *node2)
 			neighborhood[node1].push_back(node2);
 			neighborhood[node2].push_back(node1);
 
-			activeEdgeMat[node1][node2] = false;
-			activeEdgeMat[node2][node1] = false;
+			edgeMarkMatrix[node1][node2] = Utils::NEUTRAL;
+			edgeMarkMatrix[node2][node1] = Utils::NEUTRAL;
 		}
 	}
 }
@@ -126,6 +127,20 @@ Cell* CellGraph::findNodeByCoord(Cell::Coord coord)
 	return node;
 }
 
+vector<Cell*> CellGraph::getNeighborOf(Cell *node)
+{
+	vector<Cell*> result;
+	if(node != 0)
+	{
+		vector<Cell*> list = neighborhood[node];
+		for(unsigned int i=0; i<list.size(); i++)
+		{
+			result.push_back(list.at(i));
+		}
+	}
+	return result;
+}
+
 Cell* CellGraph::findNodeByCoord(unsigned int x, unsigned int y)
 {
 	Cell::Coord coord;
@@ -135,42 +150,24 @@ Cell* CellGraph::findNodeByCoord(unsigned int x, unsigned int y)
 }
 
 
-void CellGraph::activeEdge(Cell::Coord coordNode1, Cell::Coord coordNode2, bool val)
+void CellGraph::markEdge(Cell::Coord coordNode1, Cell::Coord coordNode2, Utils::Marker mark)
 {
 	Cell *node1 = findNodeByCoord(coordNode1);
 	Cell *node2 = findNodeByCoord(coordNode2);
 
-	activeEdgeMat[node1][node2] = val;
-	activeEdgeMat[node2][node1] = val;
+	edgeMarkMatrix[node1][node2] = mark;
+	edgeMarkMatrix[node2][node1] = mark;
 
 	notifyObservers();
 }
 
-bool CellGraph::isEdgeActive(Cell::Coord coordNode1, Cell::Coord coordNode2)
+Utils::Marker CellGraph::getEdgeMark(Cell::Coord coordNode1, Cell::Coord coordNode2)
 {
 	Cell *node1 = findNodeByCoord(coordNode1);
 	Cell *node2 = findNodeByCoord(coordNode2);
 
-	return activeEdgeMat[node1][node2];
+	return edgeMarkMatrix[node1][node2];
 }
 
-// test
-
-void CellGraph::makeActive(bool val)
-{
-	unsigned int x = 1;
-	unsigned int y = 2;
-
-	Cell *winner = findNodeByCoord(x, y);
-	winner->setActive(val);
-
-	Cell::Coord c1, c2;
-	c1.x = 3;
-	c1.y = 3;
-	c2 = c1;
-	c2.x+=1;
-
-	activeEdge(c1, c2, val);
-}
 
 

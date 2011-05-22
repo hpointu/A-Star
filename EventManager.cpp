@@ -8,7 +8,7 @@ EventManager::EventManager()
 void EventManager::captureEvent()
 {
 	SDL_Event event;
-	SDL_WaitEvent(&event);
+	SDL_PollEvent(&event);
 	forward(event);
 }
 

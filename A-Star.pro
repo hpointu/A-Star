@@ -13,7 +13,9 @@ SOURCES += \
     graphics/GraphDrawer.cpp \
     graphics/Line.cpp \
     graphics/NodeImage.cpp \
-    graphics/EdgeLine.cpp
+    graphics/EdgeLine.cpp \
+    algo/Algo.cpp \
+    algo/AStar.cpp
 
 HEADERS += \
 	 graphics/RenderArea.h \
@@ -31,7 +33,10 @@ HEADERS += \
     graphics/Line.h \
     graphics/Graphics.h \
     graphics/NodeImage.h \
-    graphics/EdgeLine.h
+    graphics/EdgeLine.h \
+    algo/Algo.h \
+    algo/AStar.h \
+    Utils.h
 
 QMAKE_LIBDIR += /usr/local/lib
-LIBS += -lSDL -lSDL_gfx -lSDL_image
+LIBS += -lSDL -lSDL_gfx -lSDL_image -lboost_thread

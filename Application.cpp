@@ -1,19 +1,34 @@
 #include "Application.h"
 
-#include <stdlib.h>
+#include <QTime>
 
 #include "EventManager.h"
 #include "MapFileReader.h"
 #include "graphics/Image.h"
 #include "graphics/GraphDrawer.h"
 
-Application::Application() :
+#include "model/Cell.h"
+
+#include "algo/AStar.h"
+
+Application::Application(int argc, char **argv) :
+	QApplication(argc, argv),
 	running(true)
 {
 	ra = new RenderArea(800, 600);
 	graph = 0;
 
-	srand(time(0));
+	qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+}
+
+void Application::lockRessources()
+{
+//	_mutex->lock();
+}
+
+void Application::unlockRessources()
+{
+//	_mutex->unlock();
 }
 
 void Application::run()
@@ -29,15 +44,25 @@ void Application::run()
 
 	GraphDrawer drawer(graph, ra);
 
+	Cell::Coord p1, p2;
+	p1.x = 0;
+	p1.y = 0;
+	p2.x = 10;
+	p2.y = 4;
+	AStar *astar = new AStar(graph, p1, p2);
+
 	drawer.createEdges();
 	drawer.createNodes();
 
+	astar->start();
 
 	while (running)
 	{
 		EventManager::getInstance()->captureEvent();
-		ra->display();
 
+		Application::lockRessources();
+		ra->display();
+		Application::unlockRessources();
 	}
 }
 
@@ -48,13 +73,6 @@ void Application::onEvent(SDL_Event event)
 	case SDL_QUIT:
 		running = false;
 		break;
-	case SDL_KEYDOWN:
-		graph->makeActive(true);
-		break;
-	case SDL_KEYUP:
-		graph->makeActive(false);
-		break;
-
 	default:
 		break;
 	}

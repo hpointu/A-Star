@@ -3,18 +3,29 @@
 
 #include <vector>
 #include "ModelObserver.h"
+#include "Utils.h"
 
 class ModelEntity
 {
 public:
-    ModelEntity();
+	ModelEntity();
 
-	 void addObserver(ModelObserver *observer);
+	void addObserver(ModelObserver *observer);
 
-	 void notifyObservers();
+	void notifyObservers();
+
+	inline void mark(Utils::Marker m)
+	{
+		_mark = m;
+		notifyObservers();
+	}
+
+	inline Utils::Marker getMark() { return _mark; }
+
 
 private:
-	 std::vector<ModelObserver*> *observers;
+	std::vector<ModelObserver*> *observers;
+	Utils::Marker _mark;
 };
 
 #endif // MODELENTITY_H

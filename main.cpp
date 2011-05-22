@@ -2,12 +2,12 @@
 
 #include "Application.h"
 
-int main()
+int main(int argc, char **argv)
 {
 	std::cout << "Launching..." << std::endl;
 
-	Application app;
+	Application app(argc, argv);
 	app.run();
 
-	return 1;
+	return 0;
 }
