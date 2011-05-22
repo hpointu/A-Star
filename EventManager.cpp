@@ -19,9 +19,12 @@ void EventManager::subscribe(EventListener *subscriber)
 
 void EventManager::forward(SDL_Event event)
 {
-	for(unsigned int i=0; i<listeners->size(); i++)
+	std::vector<EventListener*>::iterator it;
+	for(it = listeners->begin();
+		 it < listeners->end();
+		 it++)
 	{
-		listeners->at(i)->onEvent(event);
+		(*it)->onEvent(event);
 	}
 }
 

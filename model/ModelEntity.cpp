@@ -7,10 +7,12 @@ ModelEntity::ModelEntity()
 
 void ModelEntity::notifyObservers()
 {
-	for(unsigned int i=0; i<observers->size(); i++)
+	std::vector<ModelObserver*>::iterator it;
+	for(it = observers->begin();
+		 it < observers->end();
+		 it++)
 	{
-		ModelObserver *obs = observers->at(i);
-		obs->update();
+		(*it)->update();
 	}
 }
 

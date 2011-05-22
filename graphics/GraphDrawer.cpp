@@ -1,7 +1,7 @@
 #include "GraphDrawer.h"
 #include "model/Cell.h"
 #include "graphics/Image.h"
-#include <vector>
+#include "SDL/SDL_gfxPrimitives.h"
 
 GraphDrawer::GraphDrawer(CellGraph *graph, RenderArea *target) :
 	graph(graph),
@@ -12,11 +12,13 @@ GraphDrawer::GraphDrawer(CellGraph *graph, RenderArea *target) :
 
 void GraphDrawer::createNodes()
 {
-	std::vector<Cell*> *list = graph->getNodeList();
+	vector<Cell*>::iterator it;
 
-	for(unsigned int i=0; i<list->size(); i++)
+	for(it = graph->getNodeList()->begin();
+		 it < graph->getNodeList()->end();
+		 it++ )
 	{
-		Cell *cell = list->at(i);
+		Cell *cell = *it;
 
 		Image *img = new Image("res/node.png");
 
@@ -26,4 +28,9 @@ void GraphDrawer::createNodes()
 
 		target->addDrawable(img);
 	}
+}
+
+void GraphDrawer::createEdges()
+{
+	map< Cell*, vector<Cell*> >::iterator it;
 }

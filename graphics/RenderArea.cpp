@@ -29,10 +29,10 @@ void RenderArea::display()
 	Uint32 bgColor = SDL_MapRGB(window->format, 30, 30, 30);
 	SDL_FillRect(window, NULL, bgColor);
 
-	for(unsigned int i=0; i<drawables->size(); i++)
+	std::vector<Drawable*>::iterator it;
+	for(it = drawables->begin(); it < drawables->end(); it++)
 	{
-		Drawable *obj = drawables->at(i);
-		obj->draw(window);
+		(*it)->draw(window);
 	}
 
 	SDL_Flip(window);
