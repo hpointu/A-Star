@@ -9,7 +9,7 @@
 
 #include "model/Cell.h"
 
-#include "algo/AStar.h"
+#include "algo/Dijkstra.h"
 
 Application::Application(int argc, char **argv) :
 	QCoreApplication(argc, argv),
@@ -49,7 +49,7 @@ void Application::run()
 	p1.y = 0;
 	p2.x = graph->getWidth()-1;
 	p2.y = graph->getHeight()-1;
-	AStar *astar = new AStar(graph, p1, p2);
+	Dijkstra *astar = new Dijkstra(graph, p1, p2);
 
 	drawer.createEdges();
 	drawer.createNodes();

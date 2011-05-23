@@ -152,12 +152,8 @@ vector<Cell*> CellGraph::getNeighborOf(Cell *node)
 	vector<Cell*> result;
 	if(node != 0)
 	{
-		vector<Cell*> list = neighborhood[node];
-		for(unsigned int i=0; i<list.size(); i++)
-		{
-			result.push_back(list.at(i));
-		}
-	}
+                result = neighborhood[node];
+        }
 	return result;
 }
 

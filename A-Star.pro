@@ -17,7 +17,13 @@ SOURCES += \
     graphics/NodeImage.cpp \
     graphics/EdgeLine.cpp \
     algo/Algo.cpp \
-    algo/AStar.cpp
+    algo/AStar.cpp \
+    algo/Dijkstra.cpp
+
+res.path = res/
+res.files = res/
+
+INSTALLS += res
 
 HEADERS += \
 	 graphics/RenderArea.h \
@@ -38,7 +44,8 @@ HEADERS += \
     graphics/EdgeLine.h \
     algo/Algo.h \
     algo/AStar.h \
-    Utils.h
+    Utils.h \
+    algo/Dijkstra.h
 
 QMAKE_LIBDIR += /usr/local/lib
 LIBS += -lSDL -lSDL_gfx -lSDL_image
